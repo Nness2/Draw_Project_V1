@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{0BBB33C9-A8A0-C9B4-D130-F6FF621CF9CE}</ProjectGuid>
+    <ProjectGuid>{117F3171-A492-E499-441C-CBED8CF5AC56}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ActiveDrawingOn.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorCapabilityType.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorType.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorUtil.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\MengerSponge.cs" />
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\PinchDraw.cs" />
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\SpawnBalls.cs" />
+    <Compile Include="Assets\ScripHandmade\ActiverpinchDraw.cs" />
     <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
     <None Include="Assets\Hover\Core\Resources\Shaders\VertColorTexTwoSidedAlpha.shader" />
     <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
@@ -413,19 +415,19 @@
     <None Include="Assets\LeapMotion\Core\Version.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\VertexOffsetShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -629,13 +631,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.4f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/dede/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Dwaygon/Documents/Munster1/Projet_tuto/Draw_Project_V1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
