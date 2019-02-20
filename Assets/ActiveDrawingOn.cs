@@ -5,20 +5,22 @@ using UnityEngine;
 public class ActiveDrawingOn : MonoBehaviour
 {
 
-
+    public GameObject obj;
     // Start is called before the first frame update
     public void SetTest()
     {
-        GameObject obj = GameObject.Find("PinchDrawing")as GameObject;
-        if (obj.SetActive(true)) {
+        //obj.SetActive(true);
+        if (obj.activeSelf == true) {
             obj.SetActive(false);
+            Debug.Log ("false");
         }
 
-        if (obj.SetActive(false))
-        {
+        else if (obj.activeSelf == false){
             obj.SetActive(true);
+            Debug.Log ("true");
         }
-
+        //obj.GetComponent(PinchDraw).enabled = false;
+        //obj.enabled = !obj.enabled;
         //PinchDrawing.SetActive(false);
     }
 
