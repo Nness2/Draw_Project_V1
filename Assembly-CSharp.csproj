@@ -396,6 +396,8 @@
     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\XRSupportUtil.cs" />
     <Compile Include="Assets\LeapMotion\Core\Scripts\XR\LeapEyeDislocator.cs" />
     <Compile Include="Assets\LeapMotion\Core\Scripts\XR\XRHeightOffset.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\Cancel.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\Collision.cs" />
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\LeapRTS.cs" />
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\MengerSponge.cs" />
     <Compile Include="Assets\LeapMotion\Modules\DetectionExamples\Scripts\PinchDraw.cs" />

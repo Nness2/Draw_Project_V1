@@ -9,6 +9,8 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using Hover.Core.Renderers.Shapes.Arc;
+using Hover.Core.Items.Types;
 
 namespace Leap.Unity.DetectionExamples {
 
@@ -35,6 +37,18 @@ namespace Leap.Unity.DetectionExamples {
 
     [SerializeField]
     private float _minSegmentLength = 0.005f;
+
+    public static int _line;
+
+    //Pile des objets pouvant être cancel
+    public static List<int> zTab;
+    //Pile des objets pouvant être décancel
+    public static List<int> yTab;
+    // Permet d'acceder à la valeur du slider
+    public GameObject arcValue;
+    // Permet d'acceder à la valeur du slider
+    public static GameObject arcValueU;
+
 
     private DrawState[] _drawStates;
 
@@ -73,6 +87,37 @@ namespace Leap.Unity.DetectionExamples {
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         _drawStates[i] = new DrawState(this);
       }
+
+      //nos initialisation
+      _line = 0;
+      zTab = new List<int>();
+      yTab = new List<int>();
+      arcValueU = arcValue;
+      arcValueU.GetComponent<HoverItemDataSlider>().Value = 0.1f;
+      
+    }
+
+    public void removeZ() {
+      if (zTab.Count >= 1){
+        string s = "line" + zTab[zTab.Count - 1];
+        GameObject obj = GameObject.Find(s);
+        MeshRenderer m = obj.GetComponent<MeshRenderer>();
+        m.enabled = false;
+        yTab.Add(zTab[zTab.Count - 1]);
+        zTab.RemoveAt(zTab.Count - 1);
+        
+      }
+    }
+
+    public void removeY() {
+      if (yTab.Count >= 1){
+        string s = "line" + yTab[yTab.Count - 1];
+        GameObject obj = GameObject.Find(s);
+        MeshRenderer m = obj.GetComponent<MeshRenderer>();
+        m.enabled = true;
+        zTab.Add(yTab[yTab.Count - 1]);
+        yTab.RemoveAt(yTab.Count - 1);
+      }
     }
 
     void Update() {
@@ -95,6 +140,7 @@ namespace Leap.Unity.DetectionExamples {
     }
 
     private class DrawState {
+      
       private List<Vector3> _vertices = new List<Vector3>();
       private List<int> _tris = new List<int>();
       private List<Vector2> _uvs = new List<Vector2>();
@@ -108,11 +154,14 @@ namespace Leap.Unity.DetectionExamples {
       private Vector3 _prevRing1 = Vector3.zero;
 
       private Vector3 _prevNormal0 = Vector3.zero;
-
       private Mesh _mesh;
       private SmoothedVector3 _smoothedPosition;
 
+
+
       public DrawState(PinchDraw parent) {
+        
+
         _parent = parent;
 
         _smoothedPosition = new SmoothedVector3();
@@ -126,22 +175,30 @@ namespace Leap.Unity.DetectionExamples {
         _tris.Clear();
         _uvs.Clear();
         _colors.Clear();
-
         _smoothedPosition.reset = true;
 
+        string s = "line"+_line;
+        zTab.Add(_line);
+        _line ++;
+
+        GameObject lineObj = new GameObject(s);
         _mesh = new Mesh();
         _mesh.name = "Line Mesh";
         _mesh.MarkDynamic();
 
-        GameObject lineObj = new GameObject("Line Object");
+        
         lineObj.transform.position = Vector3.zero;
         lineObj.transform.rotation = Quaternion.identity;
         lineObj.transform.localScale = Vector3.one;
         lineObj.AddComponent<MeshFilter>().mesh = _mesh;
         lineObj.AddComponent<MeshRenderer>().sharedMaterial = _parent._material;
 
+
+
+
         return lineObj;
       }
+
 
       public void UpdateLine(Vector3 position) {
         _smoothedPosition.Update(position, Time.deltaTime);
@@ -170,8 +227,9 @@ namespace Leap.Unity.DetectionExamples {
         _mesh.RecalculateNormals();
       }
 
-      private void addRing(Vector3 ringPosition) {
+      private void addRing(Vector3 ringPosition){
         _rings++;
+        Debug.Log(arcValueU.GetComponent<HoverItemDataSlider>().Value*10); //Debug la valeur selectionné dans l'arc value
 
         if (_rings == 1) {
           addVertexRing();
@@ -215,16 +273,18 @@ namespace Leap.Unity.DetectionExamples {
                           ringPosition - _prevRing0,
                           ringNormal,
                           0);
+
           updateRingVerts(_vertices.Count - _parent._drawResolution * 2,
                           ringPosition,
                           ringPosition - _prevRing0,
                           ringNormal,
-                          1);
+                          arcValueU.GetComponent<HoverItemDataSlider>().Value*10); //On donne la valeur selectionné dans l'arc value
+
           updateRingVerts(_vertices.Count - _parent._drawResolution * 3,
                           _prevRing0,
                           ringPosition - _prevRing1,
                           _prevNormal0,
-                          1);
+                          arcValueU.GetComponent<HoverItemDataSlider>().Value*10); //On donne la valeur selectionné dans l'arc value
         }
 
         _prevRing1 = _prevRing0;

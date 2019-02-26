@@ -21,8 +21,8 @@ namespace Hover.Core.Renderers.Shapes.Arc {
 		[DisableWhenControlled(RangeMin=0)]
 		public float InnerRadius = 0.04f;
 
-		[DisableWhenControlled(RangeMin=0, RangeMax=360)]
-		public float ArcDegrees = 60;
+		[DisableWhenControlled(RangeMin=-100, RangeMax=100)]
+		public float ArcDegrees = 3;
 
 		[DisableWhenControlled]
 		public Vector3 OuterOffset = Vector3.zero;
