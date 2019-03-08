@@ -49,6 +49,17 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
+    private int state = 1;
+
+    public int State {
+      get {
+        return state;
+      }
+      set {
+        state = value;
+      }
+    }
+
 
     private DrawState[] _drawStates;
 
@@ -121,10 +132,43 @@ namespace Leap.Unity.DetectionExamples {
     }
 
     void Update() {
+      if (state == 1)
+        drawTrail();
+      if (state == 2 || state == 3)
+        draw3DObject();
+      
+   }
+
+    void draw3DObject (){
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         var detector = _pinchDetectors[i];
         var drawState = _drawStates[i];
+        if (detector.DidStartHold) {
+          if (state == 2){  // Si state vaut 2 on dessine des cubes
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.name = "line" + _line;
+            cube.transform.position = GameObject.Find("PinchDetector_R").transform.position;
+            cube.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
+            zTab.Add(_line);
+            _line ++;
+          }
+          if (state == 3){ // Si state vaut 3 on dessine des Spheres
+            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.name = "line" + _line;
+            sphere.transform.position = GameObject.Find("PinchDetector_R").transform.position;
+            sphere.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
+            zTab.Add(_line);
+            _line ++;
+          }
+        }
+      }
+    }
 
+    void drawTrail (){
+      for (int i = 0; i < _pinchDetectors.Length; i++) {
+        var detector = _pinchDetectors[i];
+        var drawState = _drawStates[i];
+        
         if (detector.DidStartHold) {
           drawState.BeginNewLine();
         }
@@ -136,7 +180,7 @@ namespace Leap.Unity.DetectionExamples {
         if (detector.IsHolding) {
           drawState.UpdateLine(detector.Position);
         }
-      }
+      }    
     }
 
     private class DrawState {
@@ -155,6 +199,7 @@ namespace Leap.Unity.DetectionExamples {
 
       private Vector3 _prevNormal0 = Vector3.zero;
       private Mesh _mesh;
+      private static BoxCollider _boxCollider;
       private SmoothedVector3 _smoothedPosition;
 
 
@@ -192,7 +237,8 @@ namespace Leap.Unity.DetectionExamples {
         lineObj.transform.localScale = Vector3.one;
         lineObj.AddComponent<MeshFilter>().mesh = _mesh;
         lineObj.AddComponent<MeshRenderer>().sharedMaterial = _parent._material;
-
+        _boxCollider = lineObj.AddComponent<BoxCollider>();
+        
 
 
 
@@ -291,6 +337,9 @@ namespace Leap.Unity.DetectionExamples {
         _prevRing0 = ringPosition;
 
         _prevNormal0 = ringNormal;
+
+        //COLOR//
+        _parent.DrawColor = Color.green;
       }
 
       private void addVertexRing() {
