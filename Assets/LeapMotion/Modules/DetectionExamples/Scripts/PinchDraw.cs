@@ -39,17 +39,41 @@ namespace Leap.Unity.DetectionExamples {
     private float _minSegmentLength = 0.005f;
 
     public static int _line;
+    public int Line {
+      get {
+        return _line;
+      }
+      set {
+        _line = value;
+      }
+    }
 
     //Pile des objets pouvant être cancel
     public static List<int> zTab;
+    public List<int> Ztab {
+      get {
+        return zTab;
+      }
+      set {
+        zTab = value;
+      }
+    }
     //Pile des objets pouvant être décancel
     public static List<int> yTab;
+    public List<int> Ytab {
+      get {
+        return yTab;
+      }
+      set {
+        yTab = value;
+      }
+    }
     // Permet d'acceder à la valeur du slider
     public GameObject arcValue;
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 1;
+    private int state = 3;
 
     public int State {
       get {
@@ -146,6 +170,8 @@ namespace Leap.Unity.DetectionExamples {
         if (detector.DidStartHold) {
           if (state == 2){  // Si state vaut 2 on dessine des cubes
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.GetComponent<BoxCollider>().isTrigger = true;
+            cube.tag = "3dObj";
             cube.name = "line" + _line;
             cube.transform.position = GameObject.Find("PinchDetector_R").transform.position;
             cube.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
@@ -154,6 +180,9 @@ namespace Leap.Unity.DetectionExamples {
           }
           if (state == 3){ // Si state vaut 3 on dessine des Spheres
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            BoxCollider boxCollider = sphere.AddComponent<BoxCollider>();
+            boxCollider.isTrigger = true;
+            sphere.tag = "3dObj";
             sphere.name = "line" + _line;
             sphere.transform.position = GameObject.Find("PinchDetector_R").transform.position;
             sphere.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
@@ -199,7 +228,6 @@ namespace Leap.Unity.DetectionExamples {
 
       private Vector3 _prevNormal0 = Vector3.zero;
       private Mesh _mesh;
-      private static BoxCollider _boxCollider;
       private SmoothedVector3 _smoothedPosition;
 
 
@@ -237,7 +265,6 @@ namespace Leap.Unity.DetectionExamples {
         lineObj.transform.localScale = Vector3.one;
         lineObj.AddComponent<MeshFilter>().mesh = _mesh;
         lineObj.AddComponent<MeshRenderer>().sharedMaterial = _parent._material;
-        _boxCollider = lineObj.AddComponent<BoxCollider>();
         
 
 

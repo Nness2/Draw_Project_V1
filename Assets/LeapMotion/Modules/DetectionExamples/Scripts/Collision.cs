@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Leap.Unity.DetectionExamples;
 
-public class coll : MonoBehaviour
+public class Collision : MonoBehaviour
 {
-    void OnCollisionEnter (Collision col)
+	public GameObject obj;
+    void OnTriggerEnter (Collider col)
     {
-        Destroy(col.gameObject);
+    	if (col.gameObject.tag == "3dObj" && obj.GetComponent<PinchDraw>().State == 4){
+    		Destroy(col.gameObject);
+    	}
     }
 }
