@@ -5145,6 +5145,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11403218, guid: 003df84d14cfa884899f0b67d2b5578b, type: 3}
+      propertyPath: IsEnabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11447084, guid: 003df84d14cfa884899f0b67d2b5578b, type: 3}
       propertyPath: HighlightProgress
       value: 0
@@ -5324,10 +5328,6 @@ PrefabInstance:
     - target: {fileID: 3317356, guid: 003df84d14cfa884899f0b67d2b5578b, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11403218, guid: 003df84d14cfa884899f0b67d2b5578b, type: 3}
-      propertyPath: IsEnabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11406784, guid: 003df84d14cfa884899f0b67d2b5578b, type: 3}
       propertyPath: IconType
@@ -5835,7 +5835,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531819952}
-  - component: {fileID: 531819953}
   m_Layer: 0
   m_Name: LeapSpace
   m_TagString: Untagged
@@ -5859,19 +5858,6 @@ Transform:
   m_Father: {fileID: 2098797247}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &531819953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11429104, guid: 18d6bf9063dcb1842be63f411fd9fc26,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531819951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21f7214440054f59a5d2da168b3e2dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &556948855
 GameObject:
   m_ObjectHideFlags: 0
@@ -12724,7 +12710,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1587970164}
-  - component: {fileID: 1419902426}
   - component: {fileID: 1587970163}
   - component: {fileID: 1419902425}
   m_Layer: 0
@@ -12757,19 +12742,6 @@ MonoBehaviour:
     IsRightToBeSpawned: 0
     IsEnabled: 1
     CanDuplicate: 0
---- !u!114 &1419902426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11415308, guid: 18d6bf9063dcb1842be63f411fd9fc26,
-    type: 2}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419902424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215a4d49fc705b74a9d3c5cbfa2c9601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1422819808
 GameObject:
   m_ObjectHideFlags: 0

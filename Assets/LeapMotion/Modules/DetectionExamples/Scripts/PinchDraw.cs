@@ -173,10 +173,13 @@ namespace Leap.Unity.DetectionExamples {
             cube.GetComponent<BoxCollider>().isTrigger = true;
             cube.tag = "3dObj";
             cube.name = "line" + _line;
-            cube.transform.position = GameObject.Find("PinchDetector_R").transform.position;
+
+            
+            cube.transform.position = GameObject.Find("RightIndex").transform.position;
             cube.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
             zTab.Add(_line);
             _line ++;
+            
           }
           if (state == 3){ // Si state vaut 3 on dessine des Spheres
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -184,10 +187,14 @@ namespace Leap.Unity.DetectionExamples {
             boxCollider.isTrigger = true;
             sphere.tag = "3dObj";
             sphere.name = "line" + _line;
-            sphere.transform.position = GameObject.Find("PinchDetector_R").transform.position;
+            
+
+            sphere.transform.position = GameObject.Find("RightIndex").transform.position;
             sphere.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
             zTab.Add(_line);
             _line ++;
+            
+            
           }
         }
       }
