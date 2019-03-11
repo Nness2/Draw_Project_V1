@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ActiveDrawingOn.cs" />
+    <Compile Include="Assets\drag.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorCapabilityType.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorType.cs" />
     <Compile Include="Assets\Hover\Core\Scripts\Cursors\CursorUtil.cs" />

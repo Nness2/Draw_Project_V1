@@ -38,6 +38,9 @@ namespace Leap.Unity.DetectionExamples {
     [SerializeField]
     private float _minSegmentLength = 0.005f;
 
+    public string _selected;
+    public int isDrag = 0;
+
     public static int _line;
     public int Line {
       get {
@@ -160,6 +163,8 @@ namespace Leap.Unity.DetectionExamples {
         drawTrail();
       if (state == 2 || state == 3)
         draw3DObject();
+      if (state == 5)
+        dragObject();
       
    }
 
@@ -215,6 +220,33 @@ namespace Leap.Unity.DetectionExamples {
 
         if (detector.IsHolding) {
           drawState.UpdateLine(detector.Position);
+        }
+      }    
+    }
+
+    void dragObject (){
+      for (int i = 0; i < _pinchDetectors.Length; i++) {
+        var detector = _pinchDetectors[i];
+        var drawState = _drawStates[i];
+        
+        if (detector.DidStartHold) {
+          isDrag = 1;
+        }
+
+        if (detector.DidRelease) {
+          isDrag = 0;
+          _selected = null;
+/*            if (GameObject.Find(_selected) != null){
+              GameObject obj = GameObject.Find(_selected);
+              obj.transform.position = GameObject.Find("RightIndex").transform.position;
+            }*/
+        }
+
+        if (detector.IsHolding) {
+          if (GameObject.Find(_selected) != null){
+            GameObject obj = GameObject.Find(_selected);
+            obj.transform.position = GameObject.Find("RightIndex").transform.position;
+          }
         }
       }    
     }

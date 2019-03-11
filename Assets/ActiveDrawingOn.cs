@@ -7,18 +7,9 @@ public class ActiveDrawingOn : MonoBehaviour
 {
 
     public GameObject obj;
-    // Start is called before the first frame update
+    
     public void activeTrail()
     {
-/*        if (obj.activeSelf == true) {
-            obj.SetActive(false);
-            Debug.Log ("false");
-        }
-
-        else if (obj.activeSelf == false){
-            obj.SetActive(true);
-            Debug.Log ("true");
-        }*/
         obj.GetComponent<PinchDraw>().State = 1;
         Debug.Log (obj.GetComponent<PinchDraw>().State);
     }
@@ -35,6 +26,11 @@ public class ActiveDrawingOn : MonoBehaviour
 
     public void delete (){
         obj.GetComponent<PinchDraw>().State = 4;
+        Debug.Log (obj.GetComponent<PinchDraw>().State);
+    }
+
+    public void drag (){
+        obj.GetComponent<PinchDraw>().State = 5;
         Debug.Log (obj.GetComponent<PinchDraw>().State);
     }
 
