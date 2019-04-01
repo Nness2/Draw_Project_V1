@@ -76,7 +76,7 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 3;
+    private int state = 1;
 
     public int State {
       get {
@@ -405,7 +405,9 @@ namespace Leap.Unity.DetectionExamples {
         _prevNormal0 = ringNormal;
 
         //COLOR//
-        _parent.DrawColor = Color.green;
+        
+        _parent.DrawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
+        //_parent.DrawColor = Color.green;
       }
 
       private void addVertexRing() {
