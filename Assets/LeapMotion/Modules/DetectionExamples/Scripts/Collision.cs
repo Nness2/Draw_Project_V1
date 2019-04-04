@@ -10,5 +10,10 @@ public class Collision : MonoBehaviour
     	if (col.gameObject.tag == "3dObj" && obj.GetComponent<PinchDraw>().State == 4){
     		Destroy(col.gameObject);
     	}
+        
+/*        if (col.gameObject.tag == "colorPicker"){
+	        col.transform.position = this.transform.position;
+        }*/
+        
     }
 }

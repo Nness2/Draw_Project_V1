@@ -33,5 +33,4 @@ public class ActiveDrawingOn : MonoBehaviour
         obj.GetComponent<PinchDraw>().State = 5;
         Debug.Log (obj.GetComponent<PinchDraw>().State);
     }
-
 }

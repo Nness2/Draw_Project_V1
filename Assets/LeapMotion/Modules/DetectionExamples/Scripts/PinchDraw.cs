@@ -7,6 +7,7 @@
  * between Leap Motion and you, your company or other organization.           *
  ******************************************************************************/
 
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Hover.Core.Renderers.Shapes.Arc;
@@ -40,7 +41,11 @@ namespace Leap.Unity.DetectionExamples {
 
     public string _selected;
     public int isDrag = 0;
+    public float curd;
+    public float curt;
+    private int pHand = 0;
 
+    private float dist;
     public static int _line;
     public int Line {
       get {
@@ -76,7 +81,7 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 1;
+    private int state = 2;
 
     public int State {
       get {
@@ -224,6 +229,24 @@ namespace Leap.Unity.DetectionExamples {
       }    
     }
 
+    double sqr(double val)
+    {
+      return val * val;
+    }
+    
+    float distance (GameObject p1, GameObject p2)
+    {
+      double p1x = (double)p1.transform.position.x;
+      double p1y = (double)p1.transform.position.y;
+      double p1z = (double)p1.transform.position.z;
+      double p2x = (double)p2.transform.position.x;
+      double p2y = (double)p2.transform.position.y;
+      double p2z = (double)p2.transform.position.z;
+      
+      return (float)Math.Sqrt(sqr(p1x-p2x)+sqr(p1y-p2y)+sqr(p1z-p2z));
+      
+    }
+    
     void dragObject (){
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         var detector = _pinchDetectors[i];
@@ -231,21 +254,36 @@ namespace Leap.Unity.DetectionExamples {
         
         if (detector.DidStartHold) {
           isDrag = 1;
+          pHand++;
+          if (pHand == 2)
+          {
+            GameObject a = GameObject.Find("PinchDetector_L");
+            GameObject b = GameObject.Find("PinchDetector_R");
+            curd = distance(a, b);
+          }
+            
         }
 
         if (detector.DidRelease) {
           isDrag = 0;
           _selected = null;
-/*            if (GameObject.Find(_selected) != null){
-              GameObject obj = GameObject.Find(_selected);
-              obj.transform.position = GameObject.Find("RightIndex").transform.position;
-            }*/
+          pHand--;
         }
 
         if (detector.IsHolding) {
           if (GameObject.Find(_selected) != null){
             GameObject obj = GameObject.Find(_selected);
+            curt = obj.transform.localScale.x;
             obj.transform.position = GameObject.Find("RightIndex").transform.position;
+            obj.transform.rotation = GameObject.Find("RightIndex").transform.rotation;
+            if (pHand == 2)
+            {
+              GameObject a = GameObject.Find("PinchDetector_L");
+              GameObject b = GameObject.Find("PinchDetector_R");
+              dist = distance(a, b);
+              obj.transform.localScale = new Vector3((curd+dist)/5, (curd+dist)/5, (curd+dist)/5); // curt taille initila du 3D / curd distance initial au clique
+            
+            }
           }
         }
       }    
