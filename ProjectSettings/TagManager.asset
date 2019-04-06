@@ -7,6 +7,8 @@ TagManager:
   - test
   - cube
   - 3dObj
+  - colorPicker
+  - ring
   layers:
   - Default
   - TransparentFX

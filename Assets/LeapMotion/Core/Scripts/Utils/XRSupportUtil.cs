@@ -27,7 +27,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return XRSettings.enabled;
       #else
-      return UnityEngine.XR.XRSettings.enabled;
+      return VRSettings.enabled;
       #endif
     }
 
@@ -35,7 +35,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return XRDevice.isPresent;
       #else
-      return UnityEngine.XR.XRDevice.isPresent;
+      return VRDevice.isPresent;
       #endif
     }
 
@@ -62,7 +62,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return InputTracking.GetLocalPosition(XRNode.CenterEye);
       #else
-      return UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.CenterEye);
+      return InputTracking.GetLocalPosition(VRNode.CenterEye);
       #endif
     }
 
@@ -70,7 +70,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return InputTracking.GetLocalRotation(XRNode.CenterEye);
       #else
-      return UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.CenterEye);
+      return InputTracking.GetLocalRotation(VRNode.CenterEye);
       #endif
     }
 
@@ -78,7 +78,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return InputTracking.GetLocalPosition(XRNode.Head);
       #else
-      return UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.Head);
+      return InputTracking.GetLocalPosition(VRNode.Head);
       #endif
     }
 
@@ -86,19 +86,19 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return InputTracking.GetLocalRotation(XRNode.Head);
       #else
-      return UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.Head);
+      return InputTracking.GetLocalRotation(VRNode.Head);
       #endif
     }
 
     public static void Recenter() {
-      UnityEngine.XR.InputTracking.Recenter();
+      InputTracking.Recenter();
     }
 
     public static string GetLoadedDeviceName() {
       #if UNITY_2017_2_OR_NEWER
       return XRSettings.loadedDeviceName;
       #else
-      return UnityEngine.XR.XRSettings.loadedDeviceName;
+      return VRSettings.loadedDeviceName;
       #endif
     }
 
@@ -106,7 +106,7 @@ namespace Leap.Unity {
       #if UNITY_2017_2_OR_NEWER
       return XRDevice.GetTrackingSpaceType() == TrackingSpaceType.RoomScale;
       #else
-      return UnityEngine.XR.XRDevice.GetTrackingSpaceType() == UnityEngine.XR.TrackingSpaceType.RoomScale;
+      return VRDevice.GetTrackingSpaceType() == TrackingSpaceType.RoomScale;
       #endif
     }
 
@@ -119,7 +119,7 @@ namespace Leap.Unity {
       UnityEngine.VR.VRStats.TryGetGPUTimeLastFrame(out gpuTime);
       #endif
       #else
-      gpuTime = UnityEngine.XR.XRStats.gpuTimeLastFrame;
+      gpuTime = UnityEngine.VR.VRStats.gpuTimeLastFrame;
       #endif
       return gpuTime;
     }
