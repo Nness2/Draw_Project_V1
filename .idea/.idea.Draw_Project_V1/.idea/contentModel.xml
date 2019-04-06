@@ -656,9 +656,6 @@
         </e>
         <e p="readme.txt" t="Include" />
         <e p="reset.cs" t="Include" />
-        <e p="ScripHandmade" t="Include">
-          <e p="ActiverpinchDraw.cs" t="Include" />
-        </e>
         <e p="Scripts" t="Include">
           <e p="ColorHuePicker.cs" t="Include" />
           <e p="ColorIndicator.cs" t="Include" />
@@ -666,10 +663,27 @@
           <e p="Draggable.cs" t="Include" />
           <e p="ExampleColorReceiver.cs" t="Include" />
           <e p="HSBColor.cs" t="Include" />
+          <e p="load.cs" t="Include" />
+          <e p="save.cs" t="Include" />
+          <e p="ScripHandmade" t="Include">
+            <e p="ActiverpinchDraw.cs" t="Include" />
+            <e p="useShaders.cs" t="Include" />
+          </e>
         </e>
         <e p="Shaders" t="Include">
           <e p="ColorHue.shader" t="Include" />
           <e p="ColorSaturationBrightness.shader" t="Include" />
+          <e p="Shader_hand_make" t="Include">
+            <e p="BlurShader.shader" t="Include" />
+            <e p="CellShading.shader" t="Include" />
+            <e p="ContourShader.shader" t="Include" />
+            <e p="GeowireShader.shader" t="Include" />
+            <e p="HoloSurfShad.shader" t="Include" />
+            <e p="NeigeShader.shader" t="Include" />
+            <e p="oil_painting.shader" t="Include" />
+            <e p="SobelShader.shader" t="Include" />
+            <e p="Standard_Hand_Make.shader" t="Include" />
+          </e>
           <e p="SolidColor.shader" t="Include" />
         </e>
       </e>

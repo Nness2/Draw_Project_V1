@@ -255,11 +255,13 @@ namespace Leap.Unity.DetectionExamples {
         if (detector.DidStartHold) {
           isDrag = 1;
           pHand++;
+          Debug.Log(pHand); 
           if (pHand == 2)
           {
             GameObject a = GameObject.Find("PinchDetector_L");
             GameObject b = GameObject.Find("PinchDetector_R");
             curd = distance(a, b);
+            
           }
             
         }
