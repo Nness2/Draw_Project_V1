@@ -68,7 +68,6 @@
     <Compile Include="Assets\Hover\Editor\Utils\DisableWhenControlledPropertyDrawer.cs" />
     <Compile Include="Assets\Hover\Editor\Utils\TreeUpdaterEditor.cs" />
     <Compile Include="Assets\Hover\Editor\Utils\TriggerButtonPropertyDrawer.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Editor\BoxSliderEditor.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CorePreferences.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomEditorBase.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomPropertyDrawerBase.cs" />
@@ -411,9 +410,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{FA51BA11-1C16-0B2A-0DD8-440200E9A9E8}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{117F3171-A492-E499-441C-CBED8CF5AC56}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
+      <Project>{C9F9469A-7515-BCBC-CBA5-3E1DE40C5E83}</Project>
+      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -209,23 +209,6 @@
     <Compile Include="Assets\Hover\RendererModules\Alpha\Scripts\HoverAlphaMeshUpdater.cs" />
     <Compile Include="Assets\Hover\RendererModules\Alpha\Scripts\HoverAlphaRendererUpdater.cs" />
     <Compile Include="Assets\Hover\RendererModules\Opaque\Scripts\HoverOpaqueMeshUpdater.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Enums\ColorValues.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Events\ColorChangedEvent.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Events\HSVChangedEvent.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Other\ColorPickerTester.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Other\TiltWindow.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorImage.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorLabel.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorPicker.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorPickerSetup.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorPresetManager.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorPresets.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorSlider.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\ColorSliderImage.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\HexColorField.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UI\SVBoxSlider.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UtilityScripts\BoxSlider.cs" />
-    <Compile Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\UtilityScripts\HSVUtil.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\ProjectionPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Arm.cs" />
@@ -429,10 +412,10 @@
     <Compile Include="Assets\Scripts\load.cs" />
     <Compile Include="Assets\Scripts\save.cs" />
     <Compile Include="Assets\Scripts\ScripHandmade\ActiverpinchDraw.cs" />
+    <Compile Include="Assets\Scripts\ScripHandmade\changeColor.cs" />
+    <Compile Include="Assets\Scripts\ScripHandmade\PinchDetector2.cs" />
     <Compile Include="Assets\Scripts\ScripHandmade\useShaders.cs" />
-    <None Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\Resources\Shaders\Compute\GenerateSVTexture.compute" />
     <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
-    <None Include="Assets\HSV-Color-Picker-Unity-master\Assets\HSVPicker\README.txt" />
     <None Include="Assets\Hover\Core\Resources\Shaders\VertColorTexTwoSidedAlpha.shader" />
     <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
     <None Include="Assets\LeapMotion\Core\readme.txt" />
@@ -443,7 +426,6 @@
     <None Include="Assets\Shaders\Shader_hand_make\BlurShader.shader" />
     <None Include="Assets\Shaders\ColorHue.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\ThresholdOverlay.shader" />
-    <None Include="Assets\HSV-Color-Picker-Unity-master\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\Shaders\Shader_hand_make\HoloSurfShad.shader" />
     <None Include="Assets\Shaders\Shader_hand_make\NeigeShader.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughForeground.shader" />
@@ -711,6 +693,12 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{FA51BA11-1C16-0B2A-0DD8-440200E9A9E8}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
