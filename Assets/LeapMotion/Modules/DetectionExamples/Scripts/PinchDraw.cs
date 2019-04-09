@@ -86,7 +86,7 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 10;
+    private int state = 1;
 
     public int State {
       get {
@@ -97,7 +97,7 @@ namespace Leap.Unity.DetectionExamples {
       }
     }
 
-
+    
     private DrawState[] _drawStates;
 
     public Color DrawColor {
@@ -143,6 +143,7 @@ namespace Leap.Unity.DetectionExamples {
       arcValueU = arcValue;
       arcValueU.GetComponent<HoverItemDataSlider>().Value = 0.1f;
       
+      
     }
 
     public void removeZ() {
@@ -177,7 +178,13 @@ namespace Leap.Unity.DetectionExamples {
       if (state == 5)
         dragObject();
       if (state == 10)
+      {
+        GameObject.Find("CanvasPicker").GetComponent<Canvas>().enabled = true;
         pickColor();
+      }
+      else 
+        GameObject.Find("CanvasPicker").GetComponent<Canvas>().enabled = false;
+      
 
     }
 
@@ -387,7 +394,6 @@ namespace Leap.Unity.DetectionExamples {
         
 
         _parent = parent;
-
         _smoothedPosition = new SmoothedVector3();
         _smoothedPosition.delay = parent._smoothingDelay;
         _smoothedPosition.reset = true;
@@ -517,9 +523,12 @@ namespace Leap.Unity.DetectionExamples {
         _prevNormal0 = ringNormal;
 
         //COLOR//
-        
-        _parent.DrawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
-        //_parent.DrawColor = Color.green;
+        //if (GameObject.Find("Picker").activeSelf == true)
+          _parent.DrawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
+        //else
+        //{
+         // _parent.DrawColor = Color.green;
+        //}
       }
 
       private void addVertexRing() {
