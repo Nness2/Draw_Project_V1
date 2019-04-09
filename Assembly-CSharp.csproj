@@ -439,8 +439,10 @@
     <None Include="Assets\Shaders\Shader_hand_make\GeowireShader.shader" />
     <None Include="Assets\Shaders\SolidColor.shader" />
     <None Include="Assets\Shaders\Shader_hand_make\SobelShader.shader" />
+    <None Include="Assets\Shaders\Neon.shader" />
     <None Include="Assets\Shaders\Shader_hand_make\Standard_Hand_Make.shader" />
     <None Include="Assets\readme.txt" />
+    <None Include="Assets\Shaders\Lightsaber.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Nness/Documents/GitHub/Draw_Project_V1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -86,7 +86,7 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 1;
+    private int state = 10;
 
     public int State {
       get {
@@ -247,7 +247,7 @@ namespace Leap.Unity.DetectionExamples {
           if (detector.DidStartHold)
           {
             drawState.BeginNewLine();
-          }
+          }  
 
           if (detector.DidRelease)
           {
@@ -271,16 +271,19 @@ namespace Leap.Unity.DetectionExamples {
         float myy = 0;
         float myx2 = 0;
         float myy2 = 0;
+        float my2 = 0;
         
         if (detector.DidStartHold) {
           if (detector == _pinchDetectors[1]){
             myx = GameObject.Find("RightIndex").transform.position.x;
             myy = GameObject.Find("RightIndex").transform.position.y;
+            myx2 = _slider.GetComponent<BoxSlider>().normalizedValueY;
+            myy2 = _slider.GetComponent<BoxSlider>().normalizedValue;
           }
           
           if (detector == _pinchDetectors[0]){
             myy = GameObject.Find("LeftIndex").transform.position.y;
-            myy2 = GameObject.Find("Hue").GetComponent<Slider>().value;
+            my2 = GameObject.Find("Hue").GetComponent<Slider>().value;
           }
         }
 
@@ -290,12 +293,12 @@ namespace Leap.Unity.DetectionExamples {
         if (detector.IsHolding)
         {
           if (detector == _pinchDetectors[1]){
-            _slider.GetComponent<BoxSlider>().normalizedValueY = -(myy-GameObject.Find("RightIndex").transform.position.y) *10;
-            _slider.GetComponent<BoxSlider>().normalizedValue = -(myx-GameObject.Find("RightIndex").transform.position.x) *10;
+            _slider.GetComponent<BoxSlider>().normalizedValueY = (myy2+(-(myy-GameObject.Find("RightIndex").transform.position.y) *5) + 1);
+            _slider.GetComponent<BoxSlider>().normalizedValue =  (((myx-GameObject.Find("RightIndex").transform.position.x) *5) + 0.5F);
           }
           
           if (detector == _pinchDetectors[0]){
-            GameObject.Find("Hue").GetComponent<Slider>().value = myy2 + (-(myy-GameObject.Find("LeftIndex").transform.position.y)*5) ;
+            GameObject.Find("Hue").GetComponent<Slider>().value = (my2+((myy-GameObject.Find("LeftIndex").transform.position.y)*-5)+1);
           }
         }
       }    

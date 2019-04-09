@@ -681,6 +681,8 @@
         <e p="Shaders" t="Include">
           <e p="ColorHue.shader" t="Include" />
           <e p="ColorSaturationBrightness.shader" t="Include" />
+          <e p="Lightsaber.shader" t="Include" />
+          <e p="Neon.shader" t="Include" />
           <e p="Shader_hand_make" t="Include">
             <e p="BlurShader.shader" t="Include" />
             <e p="CellShading.shader" t="Include" />
