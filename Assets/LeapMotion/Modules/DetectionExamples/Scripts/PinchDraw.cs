@@ -336,38 +336,40 @@ namespace Leap.Unity.DetectionExamples {
 
         if (detector.DidStartHold)
         {
-          isDrag = 1;
+          if (detector == _pinchDetectors[1])
+            isDrag = 1;
           pHand++;
-          Debug.Log(pHand);
-          if (pHand == 2){
+          if (pHand == 2 && isDrag == 1){
             GameObject a = GameObject.Find("PinchDetector_L");
             GameObject b = GameObject.Find("PinchDetector_R");
             curd = distance(a, b);
+            curt = GameObject.Find(_selected).transform.localScale.x;
           }
         }
 
         if (detector.DidRelease){
-          isDrag = 0;
-          _selected = null;
+          if (detector == _pinchDetectors[1]){
+            isDrag = 0;
+            _selected = null;
+          }
           pHand--;
         }
 
         if (detector.IsHolding){
           if (GameObject.Find(_selected) != null){
             GameObject obj = GameObject.Find(_selected);
-            curt = obj.transform.localScale.x;
+            //curt = obj.transform.localScale.x;
             obj.transform.position = GameObject.Find("RightIndex").transform.position;
             obj.transform.rotation = GameObject.Find("RightIndex").transform.rotation;
             if (pHand == 2){
               GameObject a = GameObject.Find("PinchDetector_L");
               GameObject b = GameObject.Find("PinchDetector_R");
               dist = distance(a, b);
-              obj.transform.localScale =
-              new Vector3((curd + dist) / 5, (curd + dist) / 5,(curd + dist) / 5); // curt taille initila du 3D / curd distance initial au clique
-              }
+              obj.transform.localScale = new Vector3(curt + ((curd - dist) / -2), curt + ((curd - dist) / -2), curt + ((curd - dist) / -2)); // curt taille initila du 3D / curd distance initial au clique
             }
           }
-      }    
+        }
+      }
     }
 
     private class DrawState {
