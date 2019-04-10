@@ -9,9 +9,12 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using Hover.Core.Renderers.Shapes.Arc;
 using Hover.Core.Items.Types;
+
+//[RequireComponent(typeof(BoxSlider), typeof(RawImage)), ExecuteInEditMode()]
 
 namespace Leap.Unity.DetectionExamples {
 
@@ -24,8 +27,7 @@ namespace Leap.Unity.DetectionExamples {
     [SerializeField]
     private Material _material;
 
-    [SerializeField]
-    private Color _drawColor = Color.white;
+    [SerializeField] private Color _drawColor;
 
     [SerializeField]
     private float _smoothingDelay = 0.01f;
@@ -56,6 +58,9 @@ namespace Leap.Unity.DetectionExamples {
       }
     }
 
+    private GameObject _slider; // get color box
+    private GameObject _slider2; 
+    
     //Pile des objets pouvant être cancel
     public static List<int> zTab;
     public List<int> Ztab {
@@ -81,7 +86,7 @@ namespace Leap.Unity.DetectionExamples {
     // Permet d'acceder à la valeur du slider
     public static GameObject arcValueU;
 
-    private int state = 2;
+    private int state = 1;
 
     public int State {
       get {
@@ -92,7 +97,7 @@ namespace Leap.Unity.DetectionExamples {
       }
     }
 
-
+    
     private DrawState[] _drawStates;
 
     public Color DrawColor {
@@ -138,6 +143,7 @@ namespace Leap.Unity.DetectionExamples {
       arcValueU = arcValue;
       arcValueU.GetComponent<HoverItemDataSlider>().Value = 0.1f;
       
+      
     }
 
     public void removeZ() {
@@ -164,47 +170,75 @@ namespace Leap.Unity.DetectionExamples {
     }
 
     void Update() {
+      _drawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
       if (state == 1)
         drawTrail();
       if (state == 2 || state == 3)
         draw3DObject();
       if (state == 5)
         dragObject();
+      if (state == 10)
+      {
+        GameObject.Find("CanvasPicker").GetComponent<Canvas>().enabled = true;
+        pickColor();
+      }
+      else 
+        GameObject.Find("CanvasPicker").GetComponent<Canvas>().enabled = false;
       
-   }
 
+    }
+
+/*    int getHand(String detector)
+    {
+      if (detector == "PinchDetector_R")
+        return 1;
+      else
+        return 0;
+    }*/
+    
     void draw3DObject (){
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         var detector = _pinchDetectors[i];
         var drawState = _drawStates[i];
-        if (detector.DidStartHold) {
-          if (state == 2){  // Si state vaut 2 on dessine des cubes
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.GetComponent<BoxCollider>().isTrigger = true;
-            cube.tag = "3dObj";
-            cube.name = "line" + _line;
+        
+        //if (detector == "PinchDetector_R")
+        //  break;
 
-            
-            cube.transform.position = GameObject.Find("RightIndex").transform.position;
-            cube.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
-            zTab.Add(_line);
-            _line ++;
-            
-          }
-          if (state == 3){ // Si state vaut 3 on dessine des Spheres
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            BoxCollider boxCollider = sphere.AddComponent<BoxCollider>();
-            boxCollider.isTrigger = true;
-            sphere.tag = "3dObj";
-            sphere.name = "line" + _line;
-            
+        if (detector == _pinchDetectors[1])
+        {
+          if (detector.DidStartHold)
+          {
+            if (state == 2)
+            {
+              // Si state vaut 2 on dessine des cubes
+              GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+              cube.GetComponent<BoxCollider>().isTrigger = true;
+              cube.tag = "3dObj";
+              cube.name = "line" + _line;
 
-            sphere.transform.position = GameObject.Find("RightIndex").transform.position;
-            sphere.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
-            zTab.Add(_line);
-            _line ++;
-            
-            
+
+              cube.transform.position = GameObject.Find("RightIndex").transform.position;
+              cube.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
+              zTab.Add(_line);
+              _line++;
+
+            }
+
+            if (state == 3)
+            {
+              // Si state vaut 3 on dessine des Spheres
+              GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+              BoxCollider boxCollider = sphere.AddComponent<BoxCollider>();
+              boxCollider.isTrigger = true;
+              sphere.tag = "3dObj";
+              sphere.name = "line" + _line;
+
+
+              sphere.transform.position = GameObject.Find("RightIndex").transform.position;
+              sphere.transform.localScale = new Vector3(0.05F, 0.05F, 0.05F);
+              zTab.Add(_line);
+              _line++;
+            }
           }
         }
       }
@@ -214,17 +248,65 @@ namespace Leap.Unity.DetectionExamples {
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         var detector = _pinchDetectors[i];
         var drawState = _drawStates[i];
+
+        if (detector == _pinchDetectors[1])
+        {
+          if (detector.DidStartHold)
+          {
+            drawState.BeginNewLine();
+          }  
+
+          if (detector.DidRelease)
+          {
+            drawState.FinishLine();
+          }
+
+          if (detector.IsHolding)
+          {
+            drawState.UpdateLine(detector.Position);
+          }
+        }
+      }    
+    }
+
+    void pickColor (){
+      for (int i = 0; i < _pinchDetectors.Length; i++) {
+        var detector = _pinchDetectors[i];
+        var drawState = _drawStates[i];
+        _slider = GameObject.Find("BoxSlider");
+        float myx = 0;
+        float myy = 0;
+        float myx2 = 0;
+        float myy2 = 0;
+        float my2 = 0;
         
         if (detector.DidStartHold) {
-          drawState.BeginNewLine();
+          if (detector == _pinchDetectors[1]){
+            myx = GameObject.Find("RightIndex").transform.position.x;
+            myy = GameObject.Find("RightIndex").transform.position.y;
+            myx2 = _slider.GetComponent<BoxSlider>().normalizedValueY;
+            myy2 = _slider.GetComponent<BoxSlider>().normalizedValue;
+          }
+          
+          if (detector == _pinchDetectors[0]){
+            myy = GameObject.Find("LeftIndex").transform.position.y;
+            my2 = GameObject.Find("Hue").GetComponent<Slider>().value;
+          }
         }
 
         if (detector.DidRelease) {
-          drawState.FinishLine();
         }
 
-        if (detector.IsHolding) {
-          drawState.UpdateLine(detector.Position);
+        if (detector.IsHolding)
+        {
+          if (detector == _pinchDetectors[1]){
+            _slider.GetComponent<BoxSlider>().normalizedValueY = (myy2+(-(myy-GameObject.Find("RightIndex").transform.position.y) *5) + 1);
+            _slider.GetComponent<BoxSlider>().normalizedValue =  (((myx-GameObject.Find("RightIndex").transform.position.x) *5) + 0.5F);
+          }
+          
+          if (detector == _pinchDetectors[0]){
+            GameObject.Find("Hue").GetComponent<Slider>().value = (my2+((myy-GameObject.Find("LeftIndex").transform.position.y)*-5)+1);
+          }
         }
       }    
     }
@@ -251,44 +333,43 @@ namespace Leap.Unity.DetectionExamples {
       for (int i = 0; i < _pinchDetectors.Length; i++) {
         var detector = _pinchDetectors[i];
         var drawState = _drawStates[i];
-        
-        if (detector.DidStartHold) {
-          isDrag = 1;
+
+        if (detector.DidStartHold)
+        {
+          if (detector == _pinchDetectors[1])
+            isDrag = 1;
           pHand++;
-          Debug.Log(pHand); 
-          if (pHand == 2)
-          {
+          if (pHand == 2 && isDrag == 1){
             GameObject a = GameObject.Find("PinchDetector_L");
             GameObject b = GameObject.Find("PinchDetector_R");
             curd = distance(a, b);
-            
+            curt = GameObject.Find(_selected).transform.localScale.x;
           }
-            
         }
 
-        if (detector.DidRelease) {
-          isDrag = 0;
-          _selected = null;
+        if (detector.DidRelease){
+          if (detector == _pinchDetectors[1]){
+            isDrag = 0;
+            _selected = null;
+          }
           pHand--;
         }
 
-        if (detector.IsHolding) {
+        if (detector.IsHolding){
           if (GameObject.Find(_selected) != null){
             GameObject obj = GameObject.Find(_selected);
-            curt = obj.transform.localScale.x;
+            //curt = obj.transform.localScale.x;
             obj.transform.position = GameObject.Find("RightIndex").transform.position;
             obj.transform.rotation = GameObject.Find("RightIndex").transform.rotation;
-            if (pHand == 2)
-            {
+            if (pHand == 2){
               GameObject a = GameObject.Find("PinchDetector_L");
               GameObject b = GameObject.Find("PinchDetector_R");
               dist = distance(a, b);
-              obj.transform.localScale = new Vector3((curd+dist)/5, (curd+dist)/5, (curd+dist)/5); // curt taille initila du 3D / curd distance initial au clique
-            
+              obj.transform.localScale = new Vector3(curt + ((curd - dist) / -2), curt + ((curd - dist) / -2), curt + ((curd - dist) / -2)); // curt taille initila du 3D / curd distance initial au clique
             }
           }
         }
-      }    
+      }
     }
 
     private class DrawState {
@@ -315,7 +396,6 @@ namespace Leap.Unity.DetectionExamples {
         
 
         _parent = parent;
-
         _smoothedPosition = new SmoothedVector3();
         _smoothedPosition.delay = parent._smoothingDelay;
         _smoothedPosition.reset = true;
@@ -445,9 +525,12 @@ namespace Leap.Unity.DetectionExamples {
         _prevNormal0 = ringNormal;
 
         //COLOR//
-        
-        _parent.DrawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
-        //_parent.DrawColor = Color.green;
+        //if (GameObject.Find("Picker").activeSelf == true)
+          _parent.DrawColor = GameObject.Find("Picker").GetComponent<ColorPicker>().CurrentColor;
+        //else
+        //{
+         // _parent.DrawColor = Color.green;
+        //}
       }
 
       private void addVertexRing() {
